@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smart Campus Navigation — Find the shortest or fastest route between any two campus locations instantly.">
+    <title>CampusNav — Smart Route Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header id="appHeader">
+        <div class="header-left">
+            <div class="logo">
+                <span class="logo-icon">🎓</span>
+                <div class="logo-text">
+                    <h1>CampusNav</h1>
+                    <span class="tagline">Smart Route Intelligence</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>22 Locations Mapped</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ MAIN LAYOUT ═══ -->
+    <main id="appMain">
+
+        <!-- LEFT: Map Canvas -->
+        <section class="map-section">
+            <div class="map-header">
+                <span class="map-label">📍 Interactive Campus Map</span>
+                <span class="click-hint" id="clickHint">Click any node to set your start point</span>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="mapCanvas" width="1100" height="500"></canvas>
+            </div>
+        </section>
+
+        <!-- RIGHT: Control Panel -->
+        <aside class="control-panel">
+
+            <!-- Mode Selection -->
+            <div class="panel-card">
+                <p class="card-title">Routing Mode</p>
+                <div class="mode-toggle">
+                    <button class="mode-btn active" id="shortestBtn" onclick="setMode('shortest')">
+                        <span class="mode-icon">📏</span>
+                        <span class="mode-label">Shortest</span>
+                    </button>
+                    <button class="mode-btn" id="fastestBtn" onclick="setMode('fastest')">
+                        <span class="mode-icon">⚡</span>
+                        <span class="mode-label">Fastest</span>
+                    </button>
+                </div>
+                <p class="mode-desc" id="modeDesc">Finds the path with minimum total distance.</p>
+            </div>
+
+            <!-- Route Selection -->
+            <div class="panel-card">
+                <p class="card-title">Route Selection</p>
+                <div class="node-selection">
+                    <div class="node-item">
+                        <div class="node-dot start-dot"></div>
+                        <div class="node-info">
+                            <span class="node-label">From</span>
+                            <span class="node-name unselected" id="startName">Not selected</span>
+                        </div>
+                    </div>
+                    <div class="connector-line"></div>
+                    <div class="node-item">
+                        <div class="node-dot end-dot"></div>
+                        <div class="node-info">
+                            <span class="node-label">To</span>
+                            <span class="node-name unselected" id="endName">Not selected</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="reset-btn" onclick="resetRoute()">
+                    <span>↺</span> Clear &amp; Reset
+                </button>
+            </div>
+
+            <!-- Result Summary -->
+            <div class="panel-card hidden" id="resultCard">
+                <p class="card-title">Route Summary</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-icon">📏</span>
+                        <span class="stat-value" id="statDistance">—</span>
+                        <span class="stat-label">Distance</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🚩</span>
+                        <span class="stat-value" id="statSteps">—</span>
+                        <span class="stat-label">Stops</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⏱️</span>
+                        <span class="stat-value" id="statTime">—</span>
+                        <span class="stat-label">Minutes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Directions -->
+            <div class="panel-card hidden" id="directionsCard">
+                <p class="card-title">Step-by-Step Directions</p>
+                <div class="directions-list" id="directionsList"></div>
+            </div>
+
+            <!-- Legend -->
+            <div class="panel-card legend-card">
+                <p class="card-title">Map Legend</p>
+                <div class="legend-grid">
+                    <div class="legend-item"><span class="leg-dot academic"></span>Academic / Labs</div>
+                    <div class="legend-item"><span class="leg-dot hostel"></span>Hostels / Mess</div>
+                    <div class="legend-item"><span class="leg-dot sports"></span>Sports Areas</div>
+                    <div class="legend-item"><span class="leg-dot selected-l"></span>Selected</div>
+                    <div class="legend-item"><span class="leg-dot path-l"></span>Shortest Path</div>
+                    <div class="legend-item"><span class="leg-dot dot-l"></span>Moving Dot</div>
+                </div>
+            </div>
+
+        </aside>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
