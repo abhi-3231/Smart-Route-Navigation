@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Campus Routing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- 🔷 NAVBAR -->
+    <nav>
+        <h2>Smart Campus Routing System 🚀</h2>
+    </nav>
+
+    <!-- 🔷 MAIN CONTAINER -->
+    <div class="container">
+
+        <h1>Interactive Campus Navigator</h1>
+        <p class="subtitle">Click any two locations to find the shortest route</p>
+
+        <!-- 🗺️ MAP -->
+        <canvas id="mapCanvas" width="1100" height="500"></canvas>
+
+        <!-- 📊 INFO PANEL -->
+        <div id="info">
+            <p>📍 Select starting and destination points</p>
+        </div>
+
+        <!-- 🎨 LEGEND -->
+        <div id="legend">
+            <h3>Legend</h3>
+            <div class="legend-item">
+                <span class="dot academic"></span> Academic / Blocks
+            </div>
+            <div class="legend-item">
+                <span class="dot hostel"></span> Hostels / Mess
+            </div>
+            <div class="legend-item">
+                <span class="dot sports"></span> Sports Areas
+            </div>
+            <div class="legend-item">
+                <span class="dot selected"></span> Selected Nodes
+            </div>
+            <div class="legend-item">
+                <span class="dot path"></span> Shortest Path
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ⚡ SCRIPT -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
